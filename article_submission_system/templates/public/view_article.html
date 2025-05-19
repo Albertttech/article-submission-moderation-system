@@ -1,0 +1,16 @@
+<!-- templates/public/view_article.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
+    <p><strong>Published on:</strong> {{ article.published_at|date:"F j, Y" }}</p>
+    <a href="{% url 'published_articles' %}">Back to Articles</a>
+</body>
+</html>

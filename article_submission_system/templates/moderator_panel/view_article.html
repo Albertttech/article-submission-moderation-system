@@ -1,0 +1,36 @@
+<!-- templates/moderator_panel/view_article.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p><strong>Category:</strong> {{ article.category.name }}</p>
+    <p><strong>Status:</strong> {{ article.status }}</p>
+    <p><strong>Content:</strong></p>
+    <div>{{ article.content }}</div>
+    <p><strong>Submitted by:</strong> {{ article.assigned_to.user.username }}</p>
+    <p><strong>Revision Comment:</strong> {{ article.revision_comment }}</p>
+
+    <h2>Actions</h2>
+    <div>
+        {% if article.status == 'pending' %}
+            <a href="{% url 'approve_article' article.id %}">Approve</a>
+            <a href="{% url 'reject_article' article.id %}">Reject</a>
+            <a href="{% url 'request_revision' article.id %}">Request Revision</a>
+        {% elif article.status == 'revision requested' %}
+            <span>Revision Requested</span>
+        {% elif article.status == 'approved' %}
+            <span>Approved</span>
+        {% elif article.status == 'rejected' %}
+            <span>Rejected</span>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'moderator_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

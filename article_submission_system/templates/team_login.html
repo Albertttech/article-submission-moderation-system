@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Team Login</h1>
+    <h2>Choose Your Role:</h2>
+    <button onclick="window.location.href='{% url 'editor_login' %}'">Login as Editor</button>
+    <button onclick="window.location.href='{% url 'moderator_login' %}'">Login as Moderator</button>
+    <h2>Request Membership</h2>
+    <button onclick="window.location.href='{% url 'request_membership' %}'">Request Membership</button>
+</body>
+</html>

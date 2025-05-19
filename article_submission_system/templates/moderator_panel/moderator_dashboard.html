@@ -1,0 +1,84 @@
+<!-- templates/moderator_panel/moderator_dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Moderator Dashboard</h1>
+    <h2>Articles Assigned to You</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+            {% if article.status == 'approved' and not article.published %}
+                <th href="{% url 'publish_article' article.id %}">Pub</th>
+            {% elif article.published %}
+            
+            {% endif %}
+        </tr>
+        {% for article in articles %}
+        <tr>
+            <td><a href="{% url 'moderator_view_article' article.id %}">{{ article.title }}</a></td>
+            <td>{{ article.status }}</td>
+            <td>
+                {% if article.status == 'pending' %}
+                    <a href="{% url 'approve_article' article.id %}">Approve</a>
+                    <a href="{% url 'reject_article' article.id %}">Reject</a>
+                    <a href="{% url 'request_revision' article.id %}">Request Revision</a>
+                {% elif article.status == 'revision requested' %}
+                    <span>Revision Requested</span>
+                {% elif article.status == 'approved' %}
+                    <span>Approved</span>
+                {% elif article.status == 'rejected' %}
+                    <span>Rejected</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if article.status == 'approved' and not article.published %}
+                    <a href="{% url 'publish_article' article.id %}">Publish Now</a>
+                {% elif article.published %}
+                    <span>Published</span>
+                {% endif %}
+                <!-- Existing actions -->
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No articles assigned.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'moderator_logout' %}">Logout</a>
+</body>
+</html>

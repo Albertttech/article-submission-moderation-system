@@ -1,0 +1,34 @@
+<!-- admin_panel/templates/admin_panel/reporting.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting</title>
+</head>
+<body>
+    <h1>Reporting Dashboard</h1>
+    <h2>Submission Statistics</h2>
+    <p>Total Submissions: {{ total_submissions }}</p>
+    <p>Approved Submissions: {{ approved_submissions }}</p>
+    <p>Rejected Submissions: {{ rejected_submissions }}</p>
+    <p>Approval Rate: {{ approval_rate|floatformat:2 }}%</p>
+
+    <h2>Submissions per Category</h2>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Number of Submissions</th>
+        </tr>
+        {% for item in submissions_per_category %}
+        <tr>
+            <td>{{ item.category__name }}</td>
+            <td>{{ item.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'admin_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

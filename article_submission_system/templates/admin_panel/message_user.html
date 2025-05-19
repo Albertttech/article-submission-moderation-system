@@ -1,0 +1,22 @@
+<!-- admin_panel/templates/admin_panel/message_user.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message User</title>
+</head>
+<body>
+    <h1>Message from Admin</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Recipent Details</h2>
+        
+        <p>Name: {{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</p>
+        <p>Role: {{ user_profile.user.role}}</p><br>
+        <label for="username">Subject:</label><br>
+        <textarea style="width:40%;" required></textarea>
+        
+</body>
+</html>

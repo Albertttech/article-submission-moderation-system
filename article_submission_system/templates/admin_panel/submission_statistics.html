@@ -1,0 +1,16 @@
+<!-- admin_panel/templates/admin_panel/submission_statistics.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Statistics</title>
+</head>
+<body>
+    <h1>Submission Statistics</h1>
+    <p>Total Submissions: {{ total_submissions }}</p>
+    <p>Approved Submissions: {{ approved_submissions }}</p>
+    <a href="{% url 'admin_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

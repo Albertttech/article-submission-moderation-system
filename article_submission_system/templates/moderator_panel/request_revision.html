@@ -1,0 +1,20 @@
+<!-- templates/moderator_panel/request_revision.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Revision for {{ article.title }}</title>
+</head>
+<body>
+    <h1>Request Revision for {{ article.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="comment">Revision Comment:</label><br>
+        <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Submit Revision Request</button>
+    </form>
+    <a href="{% url 'moderator_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

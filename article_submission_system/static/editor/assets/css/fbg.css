@@ -1,0 +1,23 @@
+
+#fbg {
+    background-image: url('editor/img/curved-images/white-curved.jpg')
+}
+
+/* static/editor/assets/css/styles.css */
+
+@font-face {
+    font-family: 'Nucleo';
+    src: url('../fonts/nucleo.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/nucleo.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/nucleo.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/nucleo.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/nucleo.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/nucleo.svg#Nucleo') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+/* You can define other font faces similarly */

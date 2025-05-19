@@ -1,0 +1,177 @@
+<!-- templates/editor_panel/editor_dashboard.html -->
+{% extends 'editor_panel/BASE_editor.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}Article{% endblock %}
+{% block content %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{% url 'editor_dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Article</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Article</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" placeholder="Type here...">
+            </div>
+          </div>
+          <ul class="navbar-nav justify-content-end">
+            <!-- Online Builder Button -->
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">
+                Online Builder
+              </a>
+            </li>
+          
+            <!-- Sidenav Toggle (Mobile) -->
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:void(0);" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+          
+            <!-- Settings -->
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="{% trans 'settings' %}" class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+          
+            <!-- Notifications Dropdown -->
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:void(0);" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <!-- Notification 1 -->
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:void(0);">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="{% static 'img/team-2.jpg' %}" class="avatar avatar-sm me-3" alt="Profile Picture">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+          
+                <!-- Notification 2 -->
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:void(0);">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="{% static 'img/small-logos/logo-spotify.svg' %}" class="avatar avatar-sm bg-gradient-dark me-3" alt="Spotify Logo">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+          
+                <!-- Notification 3 -->
+                <li>
+                  <a class="dropdown-item border-radius-md" href="javascript:void(0);">
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <title>credit-card</title>
+                          <g fill="#FFFFFF" fill-rule="nonzero">
+                            <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z"></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div> 
+    </div>
+</nav>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+<section class="new-article-section">
+    <h4>Create New Article</h4>
+    <form method="POST" action="{% url 'submit_article' %}" class="article-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="5"  col="13" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% empty %}
+                    <option value="">No categories available</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn-submit">Submit Article</button>
+    </form>
+</section>
+
+<section class="submitted-articles-section">
+    <h2>Submitted Articles</h2>
+    <ul class="articles-list">
+        {% for article in submitted_articles %}
+            <li class="article-item">
+                <strong class="article-title">{{ article.title }}</strong> - 
+                <span class="article-status">Status: {{ article.status }}</span>
+                {% if article.moderator_comment %}
+                    <p class="moderator-comment">Moderator Comment: {{ article.moderator_comment }}</p>
+                {% endif %}
+                <div class="article-actions">
+                    <a href="{% url 'editor_view_article' article.id %}" class="btn-view">View</a>
+                    {% if article.status == 'pending' %}
+                        <a href="{% url 'edit_article' article.id %}" class="btn-edit">Edit</a>
+                    {% endif %}
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-articles">No articles submitted yet.</li>
+        {% endfor %}
+    </ul>
+</section>
+</main>
+{% endblock %}

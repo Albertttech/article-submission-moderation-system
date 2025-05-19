@@ -1,0 +1,241 @@
+<!-- admin_panel/templates/admin_panel/dashboard.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #d32f2f;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .add-user {
+            margin: 20px 0;
+            display: inline-block;
+        }
+        .add-user a {
+            background-color: #4CAF50;
+            padding: 10px 15px;
+            color: white;
+            border-radius: 4px;
+        }
+        .add-user a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="section">
+            <h2>Moderators</h2>
+            <table>
+                <tr>
+                    <th style="width:3%">UID</th>
+                    <th style="width:10%">Username</th>
+                    <th style="width:20%">Fullname</th>
+                    <th>Email</th>
+                    <th>Work_id</th>
+                    <th>Actions</th>
+                </tr>
+                {% for user in users %}
+                    {% if user.role == 'moderator' %}
+                    <tr>
+                        <td>{{ user.user.id }}</td>
+                        <td>{{ user.user.username }}</td>
+                        <td>{{ user.user.first_name }} {{ user.user.last_name }}</td>
+                        <td>{{ user.user.email }}</td>
+                        <td>{{ user.user.work_id }}</td>
+                        <td>
+                            <a href="{% url 'edit_user' user.id %}">Edit</a>
+                            <form action="{% url 'delete_user' user.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>Editors</h2>
+            <table>
+                <tr>
+                    <th style="width:3%">UID</th>
+                    <th style="width:10%">Username</th>
+                    <th style="width:20%">Fullname</th>
+                    <th>Email</th>
+                    <th>Work_id</th>
+                    <th>Actions</th>
+                </tr>
+                {% for user in users %}
+                    {% if user.role == 'editor' %}
+                    <tr>
+                        <td>{{ user.user.id }}</td>
+                        <td>{{ user.user.username }}</td>
+                        <td>{{ user.user.first_name }} {{ user.user.last_name }}</td>
+                        <td>{{ user.user.email }}</td>
+                        <td>{{ user.user.work_id }}</td>
+                        <td>
+                            <a href="{% url 'edit_user' user.id %}">Edit   </a>
+                            <a href="{% url 'message_user' user.id %}"><i class="fa fa-message">Message</i></a>
+                            <form action="{% url 'delete_user' user.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>All Users</h2>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                {% for user in users %}
+                    {% if user.role not in 'editor' and user.role not in 'moderator' %}
+                    <tr>
+                        <td>{{ user.user.username }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            <a href="{% url 'edit_user' user.id %}">Edit</a>
+                            <form action="{% url 'delete_user' user.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+        
+        <h2>Membership Requests</h2>
+
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- templates/admin_panel/dashboard.html -->
+
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>County</th>
+        <th>Submitted On</th>
+        <th>Actions</th>
+    </tr>
+    {% for request in membership_requests %}
+    <tr>
+        <td>{{ request.full_name }}</td>
+        <td>{{ request.email }}</td>
+        <td>{{ request.county }}</td>
+        <td>{{ request.created_at }}</td>
+        <td>
+            {% if request.is_approved %}
+                <span>Approved</span>
+                {% if request.role_assigned %}
+                    <span>Role Assigned</span>  <!-- Indicate that a role has been assigned -->
+                {% else %}
+                    <a href="{% url 'assign_role' request.id %}">Assign Role</a>  <!-- Link to assign role -->
+                {% endif %}
+            {% else %}
+                <a href="{% url 'approve_membership' request.id %}">Approve</a>
+                <form action="{% url 'delete_membership_request' request.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No membership requests found.</td>
+    </tr>
+    {% endfor %}
+</table>
+        <div class="add-user">
+            <a href="{% url 'add_user' %}">Add User</a>
+        </div>
+
+        <div class="section">
+            <h2>Category Management</h2>
+            <a href="{% url 'category_management' %}">Manage Categories</a>
+        </div>
+        
+        <div class="section">
+            <h2>Submission Statistics</h2>
+            <a href="{% url 'submission_statistics' %}">View Submission Statistics</a>
+        </div>
+    </div>
+</body>
+</html>
